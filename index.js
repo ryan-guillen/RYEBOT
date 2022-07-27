@@ -60,7 +60,7 @@ client.on("messageCreate", async (message) => {
         message.reply("Hello World");
         message.react('😎');
     }
-
+    let test = 5;
 	let rand = Math.floor(Math.random() * 28);
     if (bullied.includes(message.author.id)) rand = Math.floor(Math.random() * 6);
 			 
