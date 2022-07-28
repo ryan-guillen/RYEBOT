@@ -3,7 +3,7 @@ const {generateImage1, generateImage2} = require("../util/generateImage.js")
 let emojis = ['<:WeirdChamp:903830977049141288>', '<:Amazing:931645432336089138>', '<:PEE:903823649553936414>',
             '<:keysmash:903830976852033597>', '<:pensiveclown:903830975841202177>', '<:parappasadge:903836451354054676>',
             '<:bonk:903830975790874674>', '<:marineyass:981707301612310568>', '🏳️‍🌈', '🔫', '😳', '🤮', '👻', '👺', '🙈', '🍌',
-            '🚗', '🍆', '🐮', '💔', '🚁', '🐛', '💡', '🦒', '🌚', '🤪', '🦝', '🤓', '👅', '☢️', '👣'];
+            '🚗', '🍆', '🐮', '💔', '🚁', '🐛', '💡', '🦒', '🌚', '🤪', '🦝', '🤓', '👅', '☢️', '👣', '👆'];
 let allowedChannels = ['972256308411641896', '973252050991337583', '905463817918611456', '903811651466330122']
 let bullied = [];
 let chad = false;
@@ -15,8 +15,8 @@ module.exports = {
     name: 'messageCreate',
     once: false,
     execute: async (message) => {
-        if (!allowedChannels.includes(message.channelId)) return;
-        if (message.member.id == '972245671925121084') return;
+        if (!allowedChannels.includes(message.channelId)) return; //only allowed channels
+        if (message.member.id == '972245671925121084') return; //ban responses from the bot himself
     
         if (message.mentions.has(message.client.user.id))
             message.reply("Hi! I am RYEBOT!")
@@ -26,11 +26,11 @@ module.exports = {
             message.react('😎');
         }
     
-        let rand = Math.floor(Math.random() * 28);
+        let rand = Math.floor(Math.random() * 33);
         if (bullied.includes(message.author.id)) rand = Math.floor(Math.random() * 6);
                  
     
-        if (message.content.includes('?')) {
+        if (message.content.includes('?')) { //question
             let i = Math.floor(Math.random() * 100)
             if(i < 35) {
                 message.react('🇳');
@@ -41,6 +41,11 @@ module.exports = {
                 message.react('🇪');
                 message.react('🇸');
             }
+            return;
+        }
+        if (message.content == 'BOOM!!!' && message.author.id == '159454106698645504') { //BOOM!!!
+            message.channel.bulkDelete(5, true);
+            message.channel.send('🔥 BOOM!!! 🔥');
             return;
         }
         if (rand == 0) { //react with all emojis

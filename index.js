@@ -1,4 +1,4 @@
-//RYEBOT VERSION 1.3
+//RYEBOT VERSION 1.1
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
