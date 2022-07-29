@@ -1,4 +1,6 @@
-const {generateImage1, generateImage2} = require("../util/generateImage.js")
+const {generateImage1, generateImage2, generateTrash } = require("../util/generateImage.js")
+const question = require('../util/question.js');
+const { goodnight, goodmorning } = require('../util/pleasantries.js');
 
 let emojis = ['<:WeirdChamp:903830977049141288>', '<:Amazing:931645432336089138>', '<:PEE:903823649553936414>',
             '<:keysmash:903830976852033597>', '<:pensiveclown:903830975841202177>', '<:parappasadge:903836451354054676>',
@@ -18,33 +20,41 @@ module.exports = {
         if (!allowedChannels.includes(message.channelId)) return; //only allowed channels
         if (message.member.id == '972245671925121084') return; //ban responses from the bot himself
     
+        if (message.content.includes('?')) { //question
+            question(message);
+            return;
+        }
+
+        //goodnight message
+        if ((message.content.toLowerCase().includes('good') && message.content.toLowerCase().includes('night'))
+            || message.content.toLowerCase().includes('gn')) {
+            if (message.content.toLowerCase().includes('ryebot') || message.mentions.has(message.client.user.id)) {
+              goodnight(message);
+              return;
+            }
+        }
+
+        //goodmorning message
+        if (message.content.toLowerCase().includes('good morning') || message.content.toLowerCase().includes('gm')) {
+            if (message.content.toLowerCase().includes('ryebot') || message.mentions.has(message.client.user.id)) {
+                goodmorning(message);
+                return;
+            }
+        }
+
         if (message.mentions.has(message.client.user.id))
             message.reply("Hi! I am RYEBOT!")
     
         if(message.content == "hi") {
             message.reply("Hello World");
-            message.react('😎');
         }
     
-        let rand = Math.floor(Math.random() * 33);
+        let rand = Math.floor(Math.random() * 42);
         if (bullied.includes(message.author.id)) rand = Math.floor(Math.random() * 6);
                  
-    
-        if (message.content.includes('?')) { //question
-            let i = Math.floor(Math.random() * 100)
-            if(i < 35) {
-                message.react('🇳');
-                message.react('🇴');
-            }
-            else if(i < 50) {
-                message.react('🇾');
-                message.react('🇪');
-                message.react('🇸');
-            }
-            return;
-        }
         if (message.content == 'BOOM!!!' && message.author.id == '159454106698645504') { //BOOM!!!
             message.channel.bulkDelete(5, true);
+            await new Promise(r => setTimeout(r, 100));
             message.channel.send('🔥 BOOM!!! 🔥');
             return;
         }
@@ -71,7 +81,9 @@ module.exports = {
         }
         if (rand == 4) { //deletes message
             if(Math.floor(Math.random() * 6) == 0) {
-                message.channel.send(`Oopsies! Accidentally deleted your message, sorry ${message.author} 😊`)
+                const img = await generateTrash(message);
+                message.channel.send({content: `Oopsies! Accidentally deleted your message, sorry ${message.author} 😊`,
+                    files: [img]})
                 message.delete();
             }
         }
@@ -95,3 +107,4 @@ module.exports = {
 //bot: 972245671925121084
 //ash: 677596600960286720
 //quin: 509459862934257668
+//sabrina: 621053648650240076

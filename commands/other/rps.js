@@ -69,7 +69,7 @@ module.exports = {
                 content: 'you clicked a button!'
             }) */
             console.log('button clicked');
-            if (i.customId == 'rpsAccept') {
+            if (i.customId == 'rpsAccept') { //if game is accepted, show game
                 interaction.editReply({
                     content: `${interaction.user} and ${opponent}, pick an option!`, 
                     components: [rpsRow]
@@ -84,15 +84,15 @@ module.exports = {
             }) */
 
             console.log(p1, p2);
-            if (p1 == p2) { //win determiner
+            if (p1 == p2) { //tie
                 interaction.editReply({content: 'You both tied!', components: []})
             }
-            else if ((p1 == 'rock' && p2 == 'scissors') ||
+            else if ((p1 == 'rock' && p2 == 'scissors') || //p1 wins
                     (p1 == 'paper' && p2 == 'rock') ||
                     (p1 == 'scissors' && p2 == 'paper')) {
                 interaction.editReply({content: `${interaction.user} won!`, components: []})
             }
-            else {
+            else { //p2 wins
                 interaction.editReply({content: `${opponent} won!`, components: []})
             }
         })      

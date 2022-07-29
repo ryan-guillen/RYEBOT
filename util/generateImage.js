@@ -1,15 +1,12 @@
 const Canvas = require("canvas");
 const Discord = require("discord.js");
 
-
-
 const generateImage1 = async (message) => {
     const imgBack = "./resources/meme_maker/text_bubble.png";
     const dim = {
         height: 613,
         width: 680
     }
-
 
     let username = message.author.username;
     //let avatarURL = message.author.displayAvatarURL({format: "png", dynamic: false, size: 256})
@@ -87,4 +84,48 @@ const generateImage2 = async (vMessage, cMessage) => {
     return attachment;
 }
 
-module.exports = {generateImage1, generateImage2};
+const generateTrash = async (message) => {
+    const imgBack = "./resources/meme_maker/blankmsg.png";
+    const dim = {
+        height: 163,
+        width: 574
+    }
+
+    let nick = message.member.nickname;
+    //let avatarURL = message.author.displayAvatarURL({format: "png", dynamic: false, size: 256})
+
+    const canvas = Canvas.createCanvas(dim.width, dim.height);
+    const ctx = canvas.getContext("2d");
+
+    const backimg = await Canvas.loadImage(imgBack);
+    ctx.drawImage(backimg, 0, 0);
+
+    ctx.fillStyle = "black";
+    ctx.textAlign = "left";
+
+    ctx.font = "25px comic-sans";
+    let inc = 45;
+    let spot = 81;
+    for (let i = 0; i < message.content.length; i += inc) {
+        let msg = message.content.slice(i, i+inc);
+        ctx.fillText(msg, 1, spot)
+        spot += 26;
+    }
+
+    ctx.font = "40px bold 50px"
+    ctx.fillStyle = "red";
+    ctx.textAlign = "left";
+
+    let insults = ['pissbaby', 'stupidhead', 'IDIOT', 'shit for brains', 'josh', 'April May Rose',
+                    'Your Mom', 'benjamin', 'Among Us Player', 'Sex Enjoyer', 'Shopping Cart',
+                    'The Minecraft Creeper', 'coolmathgames', 'Tomato Eater', 'Pez Dispenser',
+                    'gay', 'Cthulhu', 'тэлебачанне']
+    let insult = insults[Math.floor(Math.random() * insults.length)]
+    ctx.fillText(nick.slice(0, nick.length/2) + ` \"${insult}\" ` + 
+        nick.slice(nick.length/2, nick.length), 0, 40);
+
+    const attachment = new Discord.Attachment({url: canvas.toBuffer(), name: "b.png"});
+    return attachment;
+}
+
+module.exports = { generateImage1, generateImage2, generateTrash };

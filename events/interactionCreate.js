@@ -13,7 +13,7 @@ const handleCommands = async (interaction) => {
 
     try {
         await command.execute(interaction);
-    } catch {
+    } catch (error) {
         console.error(error);
         await interaction.reply('There was an error!');
     }

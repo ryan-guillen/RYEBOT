@@ -15,18 +15,23 @@ const client = new Discord.Client({
         Discord.IntentsBitField.Flags.MessageContent
     ]
 }); 
+const currency = new Discord.Collection();
 
 //command handler
 client.commands = new Discord.Collection();
 const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandFolders = fs.readdirSync(commandsPath);
 
-for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    //set a new item in the collection
-    //with the key as the command name and value as exported module
-    client.commands.set(command.data.name, command);
+for (const folder of commandFolders) {
+    const foldersPath = path.join(commandsPath, folder)
+    const commandFiles = fs.readdirSync(foldersPath).filter(file => file.endsWith('.js'));
+    for (const file of commandFiles) {
+        const filePath = path.join(foldersPath, file);
+        const command = require(filePath);
+        //set a new item in the collection
+        //with the key as the command name and value as exported module
+        client.commands.set(command.data.name, command);
+    }
 }
 
 //event handler
