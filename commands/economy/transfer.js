@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
+const fs = require('fs');
 const currency = require('../../util/economy/econ.js');
 
 module.exports = {
@@ -26,6 +27,21 @@ module.exports = {
         currency.add(interaction.user.id, -transferAmount);
         currency.add(transferTarget.id, transferAmount);
 
-        return interaction.reply(`Success!`);
+        if (transferTarget.id == interaction.client.user.id) {
+            const fileName = '../../data/lottery.json'
+            const file = require(fileName);
+            const donater = interaction.user.id;
+            if (!file[donater]) //if they havent donated before, put them in the json
+                file[donater] = transferAmount;
+            else
+                file[donater] += transferAmount;
+                console.log(file);
+            
+            fs.writeFile('./data/lottery.json', JSON.stringify(file, null, 2), function writeJSON(err) {
+                if (err) return console.log(err);
+            }) 
+        }
+
+        return interaction.reply(`${transferAmount} RyeCoins has been given to ${transferTarget.tag}`);
 	},
 };

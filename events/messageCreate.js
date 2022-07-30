@@ -1,6 +1,7 @@
 const {generateImage1, generateImage2, generateTrash } = require("../util/generateImage.js")
 const question = require('../util/question.js');
 const { goodnight, goodmorning } = require('../util/pleasantries.js');
+const currency = require('../util/economy/econ.js');
 
 let emojis = ['<:WeirdChamp:903830977049141288>', '<:Amazing:931645432336089138>', '<:PEE:903823649553936414>',
             '<:keysmash:903830976852033597>', '<:pensiveclown:903830975841202177>', '<:parappasadge:903836451354054676>',
@@ -50,7 +51,7 @@ module.exports = {
             message.reply("Hello World");
         }
     
-        let rand = Math.floor(Math.random() * 42);
+        let rand = Math.floor(Math.random() * 45);
         if (bullied.includes(message.author.id)) rand = Math.floor(Math.random() * 6);
                  
         if (message.content == 'BOOM!!!' && message.author.id == '159454106698645504') { //BOOM!!!
@@ -98,6 +99,10 @@ module.exports = {
                 })
             }
             chad = !chad;
+        }
+        if (rand == 6 || rand == 7 || rand == 8) { //give user money
+            message.react('💸');
+            currency.add(message.author.id, 5)
         }
         console.log(rand);
     }

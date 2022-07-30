@@ -32,3 +32,11 @@ rest.put(Routes.applicationGuildCommands(process.env.CLIENTID, '1764733367279943
 rest.put(Routes.applicationCommands(process.env.CLIENTID),{ body: commands })
     .then(() => console.log('Successfully registered application commands.'))
     .catch(console.error); 
+
+
+//delete global commands
+/*
+rest.put(Routes.applicationCommands(process.env.CLIENTID), { body: [] })
+	.then(() => console.log('Successfully deleted all application commands.'))
+	.catch(console.error);
+    */

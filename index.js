@@ -15,7 +15,6 @@ const client = new Discord.Client({
         Discord.IntentsBitField.Flags.MessageContent
     ]
 }); 
-const currency = new Discord.Collection();
 
 //command handler
 client.commands = new Discord.Collection();

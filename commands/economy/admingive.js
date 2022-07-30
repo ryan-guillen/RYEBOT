@@ -4,7 +4,7 @@ const currency = require('../../util/economy/econ.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('admingive')
-		.setDescription('gives money to a user')
+		.setDescription('Gives money to a user')
         .addUserOption(option =>
             option.setName('user')
                 .setDescription('The user to give money')
@@ -14,15 +14,11 @@ module.exports = {
                 .setDescription('The amount of money to give')
                 .setRequired(true)),
 	async execute(interaction) {
-        if (interaction.user.id != 159454106698645504) { //only allow dev to use
-            if (currency.getBalance(interaction.options.getUser('user').id) < 5) {
-                currency.add(interaction.options.getUser('user').id, 5); //gives them pity 5 coins
-                return interaction.reply(`Okay, they can have 5.`);
-            }
-            return interaction.reply('Nice try! You can\'t do that!');
-        }
+        if (interaction.user.id != 159454106698645504) //only allow dev to use
+            return interaction.reply('You aren\'t powerful enough!');
 
-		currency.add(interaction.options.getUser('user').id, interaction.options.getInteger('amt'));
-        return interaction.reply('Success!');
+        let target = interaction.options.getUser('user');
+		currency.add(target.id, interaction.options.getInteger('amt'));
+        return interaction.reply(`${target} has been given ${interaction.options.getInteger('amt')} RyeCoins`);
 	},
 };
