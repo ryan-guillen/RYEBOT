@@ -1,6 +1,17 @@
 Welcome to RYEBOT! A silly bot made by RYAN!
 
-RYEBOT VERSION 1.3
+RYEBOT VERSION 1.3.1 (8/31/2022)
+-added night time message
+-improved some command responses
+-added the ability to do multiple dicerolls once
+-added scale of 1-10 message reaction
+-added magic 8 ball responses
+-added a couple new speech bubble reactions
+-added some good jokes
+-temporarily removed lottery due to issues
+-secrets ;)
+
+RYEBOT VERSION 1.3 (7/29/2022)
 -added leaderboard command
 -improved economy command responses
 -added a system for command cooldowns
@@ -42,5 +53,4 @@ RYEBOT VERSION 1.0 (7/27/2022)
 
 todo:
 -add jokes
--replace delete with something more clever
 -add more to the economy

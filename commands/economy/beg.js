@@ -7,8 +7,9 @@ module.exports = {
 		.setDescription('Beg Ryebot for RyeCoins'),
 	async execute(interaction) {
         let target = interaction.user;
-        currency.add(target.id, 100); //gives them pity 5 coins
-        return interaction.reply(`Here's 100 RyeCoins!`);
+		let rand = (Math.floor(Math.random() * 100)) + 50;
+        currency.add(target.id, rand); //gives them pity 50 - 150 coins
+        return interaction.reply(`Here's **${rand}** RyeCoins!`);
 	},
     cooldown: 7200000
 };

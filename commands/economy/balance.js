@@ -11,6 +11,6 @@ module.exports = {
                 .setRequired(false)),
 	async execute(interaction) {
         const target = interaction.options.getUser('user') ?? interaction.user;
-        return interaction.reply(`${target.tag} has ${currency.getBalance(target.id)} RyeCoins`)
+        return interaction.reply(`${target.tag} has **${currency.getBalance(target.id)}** RyeCoins`)
 	},
 };

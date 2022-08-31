@@ -19,6 +19,6 @@ module.exports = {
 
         let target = interaction.options.getUser('user');
 		currency.add(target.id, interaction.options.getInteger('amt'));
-        return interaction.reply(`${target} has been given ${interaction.options.getInteger('amt')} RyeCoins`);
+        return interaction.reply(`${target} has been given **${interaction.options.getInteger('amt')}** RyeCoins`);
 	},
 };

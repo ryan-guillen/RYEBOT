@@ -79,7 +79,6 @@ const generateImage2 = async (vMessage, cMessage) => {
     ctx.fillText(vUsername, 200, 475)
     ctx.fillText(cUsername, 600, 475)
 
-
     const attachment = new Discord.Attachment({url: canvas.toBuffer(), name: "b.png"});
     return attachment;
 }
@@ -104,25 +103,25 @@ const generateTrash = async (message) => {
     ctx.textAlign = "left";
 
     ctx.font = "25px comic-sans";
-    let inc = 45;
-    let spot = 81;
+    let inc = 40;
+    let spot = 61;
     for (let i = 0; i < message.content.length; i += inc) {
         let msg = message.content.slice(i, i+inc);
         ctx.fillText(msg, 1, spot)
         spot += 26;
     }
 
-    ctx.font = "40px bold 50px"
+    ctx.font = "30px bold 50px"
     ctx.fillStyle = "red";
     ctx.textAlign = "left";
 
     let insults = ['pissbaby', 'stupidhead', 'IDIOT', 'shit for brains', 'josh', 'April May Rose',
-                    'Your Mom', 'benjamin', 'Among Us Player', 'Sex Enjoyer', 'Shopping Cart',
+                    'Your Mom', 'benjamin', 'Among Us Player', 'Milk Drinker', 'Shopping Cart',
                     'The Minecraft Creeper', 'coolmathgames', 'Tomato Eater', 'Pez Dispenser',
                     'gay', 'Cthulhu', 'тэлебачанне']
     let insult = insults[Math.floor(Math.random() * insults.length)]
     ctx.fillText(nick.slice(0, nick.length/2) + ` \"${insult}\" ` + 
-        nick.slice(nick.length/2, nick.length), 0, 40);
+        nick.slice(nick.length/2, nick.length), 0, 30);
 
     const attachment = new Discord.Attachment({url: canvas.toBuffer(), name: "b.png"});
     return attachment;

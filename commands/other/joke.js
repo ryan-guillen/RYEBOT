@@ -12,6 +12,18 @@ jokes = [
     {
         setup: 'Why did the scarecrow win an award?',
         punchline: 'Because he was *out-standing* in his field!'
+    },
+    {
+        setup: 'Why did the chicken cross the road?',
+        punchline: 'Because he was *out-standing* in his field!'
+    },
+    {
+        setup: 'Why was the scarecrow outstanding in his field?',
+        punchline: 'Because he was *out-standing* in his field!'
+    },
+    {
+        setup: 'Knock knock!',
+        punchline: 'Because he was *out-standing* in his field!'
     }
 ]
 

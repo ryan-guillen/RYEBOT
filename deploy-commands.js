@@ -38,5 +38,5 @@ rest.put(Routes.applicationCommands(process.env.CLIENTID),{ body: commands })
 /*
 rest.put(Routes.applicationCommands(process.env.CLIENTID), { body: [] })
 	.then(() => console.log('Successfully deleted all application commands.'))
-	.catch(console.error);
-    */
+	.catch(console.error); */
+    

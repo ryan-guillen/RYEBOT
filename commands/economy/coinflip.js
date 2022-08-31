@@ -18,39 +18,35 @@ module.exports = {
         const currentAmt = currency.getBalance(interaction.user.id);
         const bet = interaction.options.getInteger('amt');
 
+        if (bet > currentAmt) //not enough money to give
+            return interaction.reply(`Sorry ${interaction.user}, you only have ${currentAmt} RyeCoins.`);
+        if (bet <= 0) //tries to give negative num or zero
+            return interaction.reply('Please enter a number greater than zero.');    
+        if (betting.get(interaction.user.id)) //they are in a bet
+            return interaction.reply('You can\'t coinflip with another bet active.');
+
         const opponent = interaction.options.getUser('user');
-        if (!opponent) { //if not betting against someone else
-            if (bet > currentAmt) //not enough money to give
-                return interaction.reply(`Sorry, you only have ${currentAmt}.`)
-            if (bet <= 0) //tries to give negative num or zero
-                return interaction.reply('Please enter a number greater than zero.')
-            
+        if (!opponent) { //if not betting against someone else    
             if (Math.floor(Math.random() * 2) == 0) {
                 currency.add(interaction.user.id, bet);
                 const newBal = currency.getBalance(interaction.user.id);
-                return interaction.reply(`Yay! You won ${bet} and your new balance is ${newBal}`);
+                return interaction.reply(`💹 Yay! You won **${bet}** and your new balance is **${newBal}** 💹`);
             } 
             else {
                 currency.add(interaction.user.id, -bet);
                 const newBal = currency.getBalance(interaction.user.id);
-                return interaction.reply(`Youch! You lost ${bet} and your new balance is ${newBal}`);
+                return interaction.reply(`❌ Youch! You lost **${bet}** and your new balance is **${newBal}** ❌`);
             }
         }
-        //else, bet against someone else
 
+        //else, bet against someone else
         const opponentAmt = currency.getBalance(opponent.id);
-        if (bet > currentAmt) //not enough money to give
-            return interaction.reply(`Sorry ${interaction.user}, you only have ${currentAmt} RyeCoins`);
         if (bet > opponentAmt) //opponent doesnt have enough
             return interaction.reply(`${opponent.tag} only has ${opponentAmt} RyeCoins`)
-        if (bet <= 0) //tries to give negative num or zero
-            return interaction.reply('Please enter a number greater than zero.');
         if (interaction.user.id == opponent.id) //tries to bet themselves
             return interaction.reply('You can\'t bet yourself!');
-        if (betting.get(interaction.user.id)) //they are in a bet
-            return interaction.reply('You already have a bet going!');
         if (betting.get(opponent.id)) //opponent is in a bet
-            return interaction.reply('Your opponent is already in a bet!');
+            return interaction.reply('Your opponent has another bet active.');
         
         const row = new ActionRowBuilder()
         .addComponents(
@@ -59,7 +55,7 @@ module.exports = {
                 .setLabel('Accept Bet')
                 .setStyle(ButtonStyle.Success), //create paper button
         )
-        await interaction.reply({ content: `${opponent}, will you coinfip against ${interaction.user}? for **${bet}** RyeCoins?`, components: [row]})
+        await interaction.reply({ content: `${opponent}, will you coinflip against ${interaction.user}? for **${bet}** RyeCoins?`, components: [row]})
 
         if (opponent.id != interaction.client.user.id) { //if opponent is not ryebot
             betting.set(interaction.user.id, true); //sets betting state to true
