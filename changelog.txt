@@ -1,3 +1,8 @@
+RYEBOT VERSION 1.3.2 (11/19/2022)
+-cleaned up comments in the code
+-added some things to .gitignore
+-make a README.md, changed this file to the changelog
+
 RYEBOT VERSION 1.3.1 (8/31/2022)
 -added night time message
 -improved some command responses
