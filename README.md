@@ -1,6 +1,7 @@
 ## RYEBOT
 
-A discord bot I made that will make jokes, make fun of users, adds an economy, adds a rock paper scissors game, and more.
+A discord bot I made that will make jokes, make fun of users, adds an economy, adds a rock paper scissors game, and more.  
+Made with discord.js
 
 ## Features
 
