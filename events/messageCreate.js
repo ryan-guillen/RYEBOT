@@ -12,8 +12,7 @@ let eightBall = ['It is certain.', 'Signs point to yes.', 'As I see it, yes.', '
                 'Reply hazy, try again.', 'Ask again later.', 'Better not tell you now.', 'Cannot predict now.',
                 'Concentrate and ask again.', 'Don\'t count on it.', 'My reply is no.', 'My sources say no.',
                 'Outlook not so good.', 'Very doubtful.']
-let allowedChannels = ['972256308411641896', '973252050991337583', '1002565247191761058', 
-                        '1002437292306215003']
+let allowedChannels = ['972256308411641896']
 let bullied = [];
 let chad = false;
 let vMsg = '';
@@ -62,7 +61,7 @@ module.exports = {
         if (message.mentions.has(message.client.user.id))
             message.reply("Hi! I am RYEBOT!")
     
-        let rand = Math.floor(Math.random() * 160);
+        let rand = Math.floor(Math.random() * 155);
         if (bullied.includes(message.author.id)) rand = Math.floor(Math.random() * 6);
                  
         if (message.content == 'BOOM!!!' && message.author.id == '159454106698645504') { // BOOM!!! (Deletes the previous 5 messages)
