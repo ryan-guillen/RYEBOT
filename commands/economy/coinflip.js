@@ -18,15 +18,15 @@ module.exports = {
         const currentAmt = currency.getBalance(interaction.user.id);
         const bet = interaction.options.getInteger('amt');
 
-        if (bet > currentAmt) //not enough money to give
+        if (bet > currentAmt) // Not enough money to give
             return interaction.reply(`Sorry ${interaction.user}, you only have ${currentAmt} RyeCoins.`);
-        if (bet <= 0) //tries to give negative num or zero
+        if (bet <= 0) // Tries to give negative num or zero
             return interaction.reply('Please enter a number greater than zero.');    
-        if (betting.get(interaction.user.id)) //they are in a bet
+        if (betting.get(interaction.user.id)) // They are in an active bet
             return interaction.reply('You can\'t coinflip with another bet active.');
 
         const opponent = interaction.options.getUser('user');
-        if (!opponent) { //if not betting against someone else    
+        if (!opponent) { // If not betting against someone else    
             if (Math.floor(Math.random() * 2) == 0) {
                 currency.add(interaction.user.id, bet);
                 const newBal = currency.getBalance(interaction.user.id);
@@ -41,31 +41,31 @@ module.exports = {
 
         //else, bet against someone else
         const opponentAmt = currency.getBalance(opponent.id);
-        if (bet > opponentAmt) //opponent doesnt have enough
+        if (bet > opponentAmt) // Opponent doesnt have enough
             return interaction.reply(`${opponent.tag} only has ${opponentAmt} RyeCoins`)
-        if (interaction.user.id == opponent.id) //tries to bet themselves
+        if (interaction.user.id == opponent.id) // Tries to bet themselves
             return interaction.reply('You can\'t bet yourself!');
-        if (betting.get(opponent.id)) //opponent is in a bet
+        if (betting.get(opponent.id)) // Opponent is in a bet
             return interaction.reply('Your opponent has another bet active.');
         
         const row = new ActionRowBuilder()
         .addComponents(
-            new ButtonBuilder() //create rock button
+            new ButtonBuilder()
                 .setCustomId('accept')
                 .setLabel('Accept Bet')
-                .setStyle(ButtonStyle.Success), //create paper button
+                .setStyle(ButtonStyle.Success),
         )
         await interaction.reply({ content: `${opponent}, will you coinflip against ${interaction.user}? for **${bet}** RyeCoins?`, components: [row]})
 
-        if (opponent.id != interaction.client.user.id) { //if opponent is not ryebot
-            betting.set(interaction.user.id, true); //sets betting state to true
-            betting.set(opponent.id, true); //sets opponents betting state to true
+        if (opponent.id != interaction.client.user.id) { // If opponent is not ryebot
+            betting.set(interaction.user.id, true); // Sets betting state to true
+            betting.set(opponent.id, true); // Sets opponents betting state to true
             const message = await interaction.fetchReply();
             const filter = (BtnInt) => { return opponent.id === BtnInt.user.id; }
             const collector = message.createMessageComponentCollector({
                 filter,
                 max: 1, 
-                time: 30000 //30 seconds
+                time: 30000 // 30 seconds
             })
 
             collector.on('collect', (i) => {
@@ -92,7 +92,7 @@ module.exports = {
                 
             })   
         }
-        else { //if ryebot is the opponent
+        else { // If ryebot is the opponent
             if (Math.floor(Math.random() * 2) == 0) {
                 currency.add(interaction.user.id, bet);
                 currency.add(opponent.id, -bet)

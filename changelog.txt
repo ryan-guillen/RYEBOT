@@ -1,5 +1,3 @@
-Welcome to RYEBOT! A silly bot made by RYAN!
-
 RYEBOT VERSION 1.3.1 (8/31/2022)
 -added night time message
 -improved some command responses
@@ -9,7 +7,6 @@ RYEBOT VERSION 1.3.1 (8/31/2022)
 -added a couple new speech bubble reactions
 -added some good jokes
 -temporarily removed lottery due to issues
--secrets ;)
 
 RYEBOT VERSION 1.3 (7/29/2022)
 -added leaderboard command
@@ -37,7 +34,6 @@ RYEBOT VERSION 1.2 (7/29/2022)
 -added good night response
 -added /joke command
 -adjusted ryebot probabilities
--secrets ;)
 
 RYEBOT VERSION 1.1 (7/28/2022)
 -added rock paper scissors minigame! Use /rps to play
@@ -50,7 +46,3 @@ RYEBOT VERSION 1.0 (7/27/2022)
 -created command handler
 -separated events and commands into their own categories
 -created deploy-commands.js to deploy slash commands to servers
-
-todo:
--add jokes
--add more to the economy

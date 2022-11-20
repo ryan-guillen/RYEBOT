@@ -1,5 +1,8 @@
 .env
 package-lock.json
-node_modules/
-util/question.js
-util/pleasantries.js
+/node_modules/
+/util/question.js
+/util/pleasantries.js
+/util/generateImage1.js
+/util/discord_ids.txt
+/resources/pictures/cursed.png

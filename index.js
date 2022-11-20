@@ -12,7 +12,8 @@ const client = new Discord.Client({
         Discord.IntentsBitField.Flags.GuildMessages,
         Discord.IntentsBitField.Flags.GuildMembers,
         Discord.IntentsBitField.Flags.GuildMessageReactions,
-        Discord.IntentsBitField.Flags.MessageContent
+        Discord.IntentsBitField.Flags.MessageContent,
+        Discord.IntentsBitField.Flags.GuildVoiceStates,
     ]
 }); 
 
@@ -40,11 +41,11 @@ const eventFiles = fs.readdirSync(eventPath).filter(file => file.endsWith('.js')
 for (const file of eventFiles) {
     const filePath = path.join(eventPath, file);
     const event = require(filePath);
-    if (event.once) {
+    if (event.once)
         client.once(event.name, (...args) => event.execute(...args));
-    } else {
+    else
         client.on(event.name, (...args) => event.execute(...args));
-    }
 }
+
 
 client.login(process.env.TOKEN);

@@ -22,17 +22,17 @@ for (folder of commandFolders) {
 const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
 
 //test server 
-/*
+
 rest.put(Routes.applicationGuildCommands(process.env.CLIENTID, '176473336727994368'), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error); 
-*/
-//global server
 
+//global server
+/*
 rest.put(Routes.applicationCommands(process.env.CLIENTID),{ body: commands })
     .then(() => console.log('Successfully registered application commands.'))
     .catch(console.error); 
-
+*/
 
 //delete global commands
 /*

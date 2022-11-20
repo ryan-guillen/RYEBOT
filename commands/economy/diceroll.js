@@ -19,9 +19,9 @@ module.exports = {
         const bet = interaction.options.getInteger('amt');
         let times = interaction.options.getInteger('times');
         if (!times) times = 1;
-        if (bet * times > currentAmt) //not enough money to give
+        if (bet * times > currentAmt) // Not enough money to give
             return interaction.reply(`Sorry, you only have ${currentAmt} RyeCoins.`);
-        if (bet <= 0) //tries to give negative num or zero
+        if (bet <= 0) // Tries to give negative num or zero
             return interaction.reply('Please enter a number greater than zero.');
         if (times <= 0)
             return interaction.reply('Please enter a number greater than zero.');

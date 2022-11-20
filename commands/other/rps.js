@@ -12,7 +12,7 @@ module.exports = {
 	async execute(interaction) {
 		const row = new ActionRowBuilder()
             .addComponents(
-                new ButtonBuilder() //create button to accept game
+                new ButtonBuilder() // Create button to accept game
                     .setCustomId('rpsAccept')
                     .setLabel('Accept')
                     .setStyle(ButtonStyle.Success),
@@ -22,15 +22,15 @@ module.exports = {
 
         const rpsRow = new ActionRowBuilder()
         .addComponents(
-            new ButtonBuilder() //create rock button
+            new ButtonBuilder() // Create rock button
                 .setCustomId('rock')
                 .setLabel('Rock')
-                .setStyle(ButtonStyle.Primary), //create paper button
+                .setStyle(ButtonStyle.Primary), // Create paper button
             new ButtonBuilder()
                 .setCustomId('paper')
                 .setLabel('Paper')
                 .setStyle(ButtonStyle.Primary),
-            new ButtonBuilder() //create scissors button
+            new ButtonBuilder() // Create scissors button
                 .setCustomId('scissors')
                 .setLabel('Scissors')
                 .setStyle(ButtonStyle.Primary),
@@ -44,7 +44,7 @@ module.exports = {
             console.log(BtnInt);
             if (BtnInt.customId == 'rpsAccept')
                 return opponent.id === BtnInt.user.id;
-            else { //controls who can still choose an option
+            else { // Controls who can still choose an option
                 if (interaction.user.id === BtnInt.user.id && determine != 1) {
                     determine += 1;
                     p1 = BtnInt.customId;
@@ -60,8 +60,8 @@ module.exports = {
 
         const collector = message.createMessageComponentCollector({
             filter,
-            max: 3, //3 button touches, accept -> p1 choice -> p2 choice
-            time: 60000 //60 seconds
+            max: 3, // 3 button touches, accept -> p1 choice -> p2 choice
+            time: 60000 // 60 seconds
         })
 
         collector.on('collect', (i) => {
@@ -69,7 +69,7 @@ module.exports = {
                 content: 'you clicked a button!'
             }) */
             console.log('button clicked');
-            if (i.customId == 'rpsAccept') { //if game is accepted, show game
+            if (i.customId == 'rpsAccept') { // if game is accepted, show game
                 interaction.editReply({
                     content: `${interaction.user} and ${opponent}, pick an option!`, 
                     components: [rpsRow]
@@ -78,21 +78,16 @@ module.exports = {
         })
 
         collector.on('end', async (collection) => {
-            /*
-            collection.forEach((click) => {
-                console.log(click.user.id, click.customId)
-            }) */
-
             console.log(p1, p2);
-            if (p1 == p2) { //tie
+            if (p1 == p2) { // Tie
                 interaction.editReply({content: 'You both tied!', components: []})
             }
-            else if ((p1 == 'rock' && p2 == 'scissors') || //p1 wins
+            else if ((p1 == 'rock' && p2 == 'scissors') || // p1 wins
                     (p1 == 'paper' && p2 == 'rock') ||
                     (p1 == 'scissors' && p2 == 'paper')) {
                 interaction.editReply({content: `${interaction.user} won!`, components: []})
             }
-            else { //p2 wins
+            else { // p2 wins
                 interaction.editReply({content: `${opponent} won!`, components: []})
             }
         })      

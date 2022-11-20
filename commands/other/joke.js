@@ -34,7 +34,7 @@ module.exports = {
 	async execute(interaction) {
         let rand = Math.floor(Math.random() * jokes.length);
         interaction.reply(jokes[rand].setup);
-		await new Promise(r => setTimeout(r, 14000));
+		await new Promise(r => setTimeout(r, 14000)); // Wait 14 seconds
         interaction.channel.send(jokes[rand].punchline);
 	},
 };

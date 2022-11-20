@@ -20,21 +20,21 @@ module.exports = {
         const transferAmount = interaction.options.getInteger('amt');
         const transferTarget = interaction.options.getUser('user');
 
-        if (betting.get(interaction.user.id)) //they are in a bet
+        if (betting.get(interaction.user.id)) // They are in a bet
             return interaction.reply('You can\'t transfer while you have an active bet!');
-        if (transferAmount > currentAmount) //not enough money to give
+        if (transferAmount > currentAmount) // Not enough money to give
             return interaction.reply(`Sorry, you only have ${currentAmount}.`)
-        if (transferAmount <= 0) //tries to give negative num or zero
+        if (transferAmount <= 0) // Tries to give negative num or zero
             return interaction.reply('Please enter a number greater than zero.')
-        //otherwise, continue
+        // Otherwise, continue
         currency.add(interaction.user.id, -transferAmount);
         currency.add(transferTarget.id, transferAmount);
 
-        if (transferTarget.id == interaction.client.user.id) { //if they are transferring to ryebot
+        if (transferTarget.id == interaction.client.user.id) { // If they are transferring to ryebot
             const fileName = '../../data/lottery.json'
             const file = require(fileName);
             const donater = interaction.user.id;
-            if (!file[donater]) //if they havent donated before, put them in the json
+            if (!file[donater]) // If they havent donated before, put them in the json
                 file[donater] = transferAmount;
             else
                 file[donater] += transferAmount;
