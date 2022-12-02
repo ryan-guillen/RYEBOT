@@ -1,9 +1,7 @@
 .env
-package-lock.json
 /node_modules/
 /util/question.js
 /util/pleasantries.js
 /util/generateImage.js
 /util/discord_ids.txt
 /resources/pictures/cursed.png
-
